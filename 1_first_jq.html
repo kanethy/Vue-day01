@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/jquery-1.11.3.js"></script>
+</head>
+<body>
+  <button>-</button><span>0</span><button>+</button>
+  <script>
+    //点+ 数量+1
+    //DOM 4步
+    //1. 查找触发事件的元素
+    //查找内容中包含+的button元素
+    $("button:contains(+)")
+    //2. 绑定事件处理函数
+    .click(function(){
+      //3. 查找要修改的元素
+      //本例中: 查找当前按钮的前一个元素span
+      var $span=$(this).prev();
+      //4. 修改元素
+      //4.1 取出元素的旧内容，并转为整数
+      var n=parseInt($span.html());
+      //4.2 计算新值: 将n+1
+      n++;
+      //4.3 将新值再放回去
+      $span.html(n);
+    });
+    //点- 数量-1
+    //DOM 4步
+    //1. 查找触发事件的元素
+    //查找内容中包含-的button元素
+    $("button:contains(-)")
+    //2. 绑定事件处理函数
+    .click(function(){
+      //3. 查找要修改的元素
+      //本例中: 查找当前按钮的后一个元素span
+      var $span=$(this).next();
+      //4. 修改元素
+      //4.1 取出元素的旧内容，并转为整数
+      var n=parseInt($span.html());
+      //4.2 计算新值: 
+      //如果n>0，才能-1
+      if(n>0){
+        n--;
+      }
+      //否则什么也不干
+      //4.3 将新值再放回去
+      $span.html(n);
+    });
+  </script>
+</body>
+</html>

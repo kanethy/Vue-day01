@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+  <!--1. 先定义增强版界面（HTML+CSS）-->
+  <div id="app">
+    <button @click="minus">-</button>
+    <span>{{n}}</span>
+    <button @click="add">+</button>
+  </div>
+  <script>
+    //2. 创建一个Vue类型的对象来监视页面中的内容
+    var vm=new Vue({
+      el:"#app", 
+      //3. 在Vue中定义好页面所需的一切资源: 变量+事件处理函数
+      data:{
+        n:0 
+      },
+      methods:{
+        add(){
+          this.n++
+        },
+        minus(){
+          if(this.n>0){ this.n-- }
+        }
+      }
+    });
+    console.log(vm);
+  </script>
+</body>
+</html>

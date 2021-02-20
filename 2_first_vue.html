@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+  <!--1. 先定义增强版界面（HTML+CSS）
+    要求1: 整个界面要用一个唯一的父元素包裹起来,习惯上都用<div id="app">
+    要求2: 找到界面中将来可能发生变化的位置，用{{变量名}}特殊语法标记出来
+    本例中: 点+/-号，span元素的内容会发生变化
+    要求3: 找到界面中可以点击的位置绑定事件处理函数
+    //本例中: 点button +，执行+1(add)操作, 点button -, 执行-1(minus)操作
+  -->
+  <div id="app">
+    <button @click="minus">-</button>
+    <span>{{n}}</span>
+    <button @click="add">+</button>
+  </div>
+  <script>
+    //2. 创建一个Vue类型的对象来监视页面中的内容
+    //问题: 监视哪儿？
+    //解决: 用el属性:"选择器"，为new Vue指明要监视的范围。el是element的缩写，指要监视的元素
+    new Vue({
+      el:"#app", //new Vue只负责id为app的div内的元素
+      //3. 在Vue中定义好页面所需的一切资源: 变量+事件处理函数
+      //3.1 页面所需的所有变量，都必须保存在data属性中，且以对象属性形式保存
+      data:{
+        //因为界面上需要一个变量n，所以这里需要些一个n支持页面
+        n:0 //起始值为0
+      },
+      //3.2 页面所需的所有事件处理函数，都必须保存在methods属性中，且以对象方法形式保存
+      methods:{
+        //因为界面上需要两个事件处理函数add和minus
+        //所以这里需要定义两个方法
+        add(){//add:function(){
+          //vue中的事件处理函数不需要做任何DOM操作，只需要专心操作data中的变量即可
+          //强调: vue中methods中的方法要使用data中的变量，必须加this.
+          this.n++
+          //结果: new Vue会自动将n变量的新值放到页面上
+        },
+        minus(){//minus:function(){
+          //如果当前n>0，才n--
+          if(this.n>0){ this.n-- }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
